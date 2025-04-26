@@ -1,0 +1,31 @@
+<div class="container">
+  <h1>Agregar Festivo</h1>
+  <input [(ngModel)]="festivo.nombre" placeholder="Nombre" />
+  <input [(ngModel)]="festivo.dia" type="number" placeholder="Día" />
+  <input [(ngModel)]="festivo.mes" type="number" placeholder="Mes" />
+  <input [(ngModel)]="festivo.diasPascuas" type="number" placeholder="Días Pascuas" />
+  <input [(ngModel)]="festivo.idTipo" type="number" placeholder="ID Tipo" />
+  <input [(ngModel)]="festivo.tipo.id" type="number" placeholder="ID del Tipo" />
+  <input [(ngModel)]="festivo.tipo.nombre" placeholder="Nombre del Tipo" />
+  <button (click)="agregar()">Agregar</button>
+
+  <h2>Consultar Festivo por ID</h2>
+  <input [(ngModel)]="idConsulta" type="number" placeholder="ID a Consultar" />
+  <button (click)="consultar()">Consultar</button>
+
+  <h2>Listar Todos</h2>
+  <button (click)="listarTodos()">Listar Todos</button>
+
+  <h2>Buscar por Tipo y Nombre</h2>
+  <input [(ngModel)]="tipoBusqueda" type="number" placeholder="Tipo" />
+  <input [(ngModel)]="nombreBusqueda" placeholder="Nombre" />
+  <button (click)="buscarPorTipoYNombre()">Buscar</button>
+
+  <h2>Modificar Festivo</h2>
+  <input [(ngModel)]="idModificar" type="number" placeholder="ID a Modificar" />
+  <button (click)="actualizarFestivo()">Modificar</button>
+
+  <h2>Eliminar Festivo</h2>
+  <input [(ngModel)]="idEliminar" type="number" placeholder="ID a Eliminar" />
+  <button (click)="eliminarFestivo()">Eliminar</button>
+</div>
