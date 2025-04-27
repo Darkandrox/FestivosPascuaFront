@@ -69,4 +69,26 @@ export class AppComponent {
       alert('Festivo eliminado');
     });
   }
+
+
+  fechaValidar: string = '';
+  resultadoValidacion: boolean | null = null;
+
+
+  validarFecha() {
+    if (!this.fechaValidar) {
+      this.resultadoValidacion = null;
+      return;
+    }
+    const fechaSeleccionada = new Date(this.fechaValidar);
+
+    const dia = fechaSeleccionada.getDate();
+    const mes = fechaSeleccionada.getMonth() + 1; // Los meses en JavaScript comienzan en 0
+    const año = fechaSeleccionada.getFullYear();
+  
+    // Ahora comparamos solo día, mes y año con los festivos
+    this.resultadoValidacion = this.todosFestivos.some(festivo => 
+      festivo.dia === dia && festivo.mes === mes && festivo.año === año
+    );
+  }
 }

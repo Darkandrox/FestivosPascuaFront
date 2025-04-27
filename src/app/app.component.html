@@ -84,6 +84,18 @@
 
   <hr>
 
+  <h2>Validar Fecha como Festivo</h2>
+  <input [(ngModel)]="fechaValidar" type="date" placeholder="Seleccionar fecha" />
+  <button (click)="validarFecha()">Validar</button>
+
+  <div *ngIf="resultadoValidacion !== null">
+  <h3>Resultado:</h3>
+  <p *ngIf="resultadoValidacion">¡La fecha es festivo! </p>
+  <p *ngIf="!resultadoValidacion">No es un festivo. </p>
+  </div>
+
+  <hr>
+
   <h2>Modificar Festivo</h2>
   <input [(ngModel)]="idModificar" type="number" placeholder="ID a Modificar" />
   <button (click)="actualizarFestivo()">Modificar</button>
@@ -93,4 +105,5 @@
   <h2>Eliminar Festivo</h2>
   <input [(ngModel)]="idEliminar" type="number" placeholder="ID a Eliminar" />
   <button (click)="eliminarFestivo()">Eliminar</button>
+
 </div>

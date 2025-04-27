@@ -24,9 +24,9 @@ export class FestivosService {
     return this.http.get(`${this.baseUrl}/buscar/?tipo=${tipo}&nombre=${nombre}`);
   }
 
-  validarFecha(dia: number, mes: number, anio: number): Observable<any> {
+  /*validarFecha(dia: number, mes: number, anio: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/validar?dia=${dia}&mes=${mes}&anio=${anio}`);
-  }
+  }*/
 
   actualizarFestivo(id: number, festivo: any): Observable<any> {
     return this.http.put(`${this.baseUrl}/actualizar/${id}`, festivo);
@@ -34,5 +34,10 @@ export class FestivosService {
 
   eliminarFestivo(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/eliminar/${id}`);
+  }
+
+  validarFechaCompleta(fecha: Date): Observable<any> {
+    const fechaStr = fecha.toISOString(); //fecha en formato (año-mes-dia)
+    return this.http.get(`${this.baseUrl}/validar?fecha=${fechaStr}`);
   }
 }
