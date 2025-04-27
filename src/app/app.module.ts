@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
-import { FestivosService } from './festivos.service';
+import { FestivosService } from '../core/service/festivos.service';
 
 @NgModule({
   declarations: [AppComponent],

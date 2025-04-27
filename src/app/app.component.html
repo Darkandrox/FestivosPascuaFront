@@ -29,7 +29,7 @@
   <h2>Listar Todos los Festivos</h2>
   <button (click)="listarTodos()">Listar Todos</button>
 
-  <table *ngIf="todosFestivos.length > 0" border="1">
+  <table *ngIf="(lenght$ | async)> 0" border="1">
     <thead>
       <tr>
         <th>ID</th>

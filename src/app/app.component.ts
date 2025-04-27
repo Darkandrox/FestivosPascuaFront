@@ -1,13 +1,15 @@
-import { Component } from '@angular/core';
-import { FestivosService } from './festivos.service';
+import { Component, input, OnInit } from '@angular/core';
+import { FestivosService } from '../core/service/festivos.service';
+import { ClsFestivo } from '../shared/entidades/ClsFestivo';
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
-  festivo = {
+export class AppComponent implements OnInit {
+  festivo =  {
     id: 0,
     nombre: '',
     dia: 0,
@@ -21,17 +23,23 @@ export class AppComponent {
   };
 
   festivoConsultado: any;
-  todosFestivos: any[] = [];
+  todosFestivos$ = this.festivosService.listaFestivos$;
   festivosFiltrados: any[] = [];
-
   idConsulta: number = 0;
   tipoBusqueda: number = 0;
   nombreBusqueda: string = '';
   idModificar: number = 0;
   idEliminar: number = 0;
-
+  lenght$ = this.todosFestivos$.pipe(map(festivos => festivos.length));
+  fechaValidar: string = ''; // Inicializa con la fecha actual
+  resultadoValidacion: boolean | null = null;
   constructor(private festivosService: FestivosService) {}
 
+  ngOnInit() {
+    this.festivosService.listarTodos().subscribe();
+  }
+
+  
   agregar() {
     this.festivosService.agregarFestivo(this.festivo).subscribe(() => {
       alert('Festivo agregado');
@@ -46,7 +54,7 @@ export class AppComponent {
 
   listarTodos() {
     this.festivosService.listarTodos().subscribe(data => {
-      this.todosFestivos = data;
+      this.todosFestivos$ = data;
     });
   }
 
@@ -70,25 +78,23 @@ export class AppComponent {
     });
   }
 
-
-  fechaValidar: string = '';
-  resultadoValidacion: boolean | null = null;
-
-
   validarFecha() {
+    console.log("empieza la validacion de la fecha", this.fechaValidar);
     if (!this.fechaValidar) {
       this.resultadoValidacion = null;
       return;
     }
-    const fechaSeleccionada = new Date(this.fechaValidar);
+    const [anio, mes, dia] = this.fechaValidar.split('-').map(Number);
+    this.checkIfFestivoExists(dia, mes, anio).subscribe(existe => {
+      this.resultadoValidacion = existe;
+    })
+  };
 
-    const dia = fechaSeleccionada.getDate();
-    const mes = fechaSeleccionada.getMonth() + 1; // Los meses en JavaScript comienzan en 0
-    const año = fechaSeleccionada.getFullYear();
-  
-    // Ahora comparamos solo día, mes y año con los festivos
-    this.resultadoValidacion = this.todosFestivos.some(festivo => 
-      festivo.dia === dia && festivo.mes === mes && festivo.año === año
+  checkIfFestivoExists(dia: number, mes: number, anio: number): Observable<boolean> {
+    return this.todosFestivos$.pipe(
+      map(festivos => festivos.some(festivo => 
+        festivo.dia === dia && festivo.mes === mes && festivo.anio === anio
+      ))
     );
   }
 }
