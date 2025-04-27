@@ -1,0 +1,56 @@
+<div class="container">
+  <h1>Agregar Tipo</h1>
+  <input [(ngModel)]="tipo.nombre" placeholder="Nombre del Tipo" />
+  <button (click)="agregarTipo()">Agregar</button>
+
+  <hr>
+
+  <h2>Consultar Tipo por ID</h2>
+  <input [(ngModel)]="idConsulta" type="number" placeholder="ID a Consultar" />
+  <button (click)="consultarTipoPorId()">Consultar</button>
+
+  <div *ngIf="tipoConsultado">
+    <h3>Tipo Consultado:</h3>
+    <p><strong>ID:</strong> {{ tipoConsultado.id }}</p>
+    <p><strong>Nombre:</strong> {{ tipoConsultado.nombre }}</p>
+  </div>
+
+  <hr>
+
+  <h2>Listar Todos los Tipos</h2>
+  <button (click)="listarTipos()">Listar Todos</button>
+
+  <table *ngIf="(lenght$ | async) > 0" border="1">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let tipo of todosTipos">
+        <td>{{ tipo.id }}</td>
+        <td>{{ tipo.nombre }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <h2>Modificar Tipo</h2>
+  <input [(ngModel)]="idModificar" type="number" placeholder="ID a Modificar" />
+  <input [(ngModel)]="tipo.nombre" placeholder="Nuevo Nombre del Tipo" />
+  <button (click)="actualizarTipo()">Modificar</button>
+
+  <hr>
+
+  <h2>Eliminar Tipo</h2>
+  <input [(ngModel)]="idEliminar" type="number" placeholder="ID a Eliminar" />
+  <button (click)="eliminarTipo()">Eliminar</button>
+
+  <hr>
+
+  <button   (click)="irPaginaFestivo('festivos')">Ir a Tipo</button>
+  <a routerLink="/festivos">Ir a Festivos</a>
+  
+</div>

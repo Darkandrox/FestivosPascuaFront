@@ -10,6 +10,4 @@ export interface ClsFestivo {
     id: number;
     nombre: string;
   };
-
-
 }
