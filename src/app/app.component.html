@@ -9,21 +9,86 @@
   <input [(ngModel)]="festivo.tipo.nombre" placeholder="Nombre del Tipo" />
   <button (click)="agregar()">Agregar</button>
 
+  <hr>
+
   <h2>Consultar Festivo por ID</h2>
   <input [(ngModel)]="idConsulta" type="number" placeholder="ID a Consultar" />
   <button (click)="consultar()">Consultar</button>
 
-  <h2>Listar Todos</h2>
+  <div *ngIf="festivoConsultado">
+    <h3>Festivo Consultado:</h3>
+    <p><strong>Nombre:</strong> {{ festivoConsultado.nombre }}</p>
+    <p><strong>Día:</strong> {{ festivoConsultado.dia }}</p>
+    <p><strong>Mes:</strong> {{ festivoConsultado.mes }}</p>
+    <p><strong>Días Pascuas:</strong> {{ festivoConsultado.diasPascuas }}</p>
+    <p><strong>Tipo:</strong> {{ festivoConsultado.tipo?.nombre }}</p>
+  </div>
+
+  <hr>
+
+  <h2>Listar Todos los Festivos</h2>
   <button (click)="listarTodos()">Listar Todos</button>
+
+  <table *ngIf="todosFestivos.length > 0" border="1">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Día</th>
+        <th>Mes</th>
+        <th>Días Pascuas</th>
+        <th>Tipo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let festivo of todosFestivos">
+        <td>{{ festivo.id }}</td>
+        <td>{{ festivo.nombre }}</td>
+        <td>{{ festivo.dia }}</td>
+        <td>{{ festivo.mes }}</td>
+        <td>{{ festivo.diasPascuas }}</td>
+        <td>{{ festivo.tipo?.nombre }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
 
   <h2>Buscar por Tipo y Nombre</h2>
   <input [(ngModel)]="tipoBusqueda" type="number" placeholder="Tipo" />
   <input [(ngModel)]="nombreBusqueda" placeholder="Nombre" />
   <button (click)="buscarPorTipoYNombre()">Buscar</button>
 
+  <table *ngIf="festivosFiltrados.length > 0" border="1">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Día</th>
+        <th>Mes</th>
+        <th>Días Pascuas</th>
+        <th>Tipo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let festivo of festivosFiltrados">
+        <td>{{ festivo.id }}</td>
+        <td>{{ festivo.nombre }}</td>
+        <td>{{ festivo.dia }}</td>
+        <td>{{ festivo.mes }}</td>
+        <td>{{ festivo.diasPascuas }}</td>
+        <td>{{ festivo.tipo?.nombre }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
   <h2>Modificar Festivo</h2>
   <input [(ngModel)]="idModificar" type="number" placeholder="ID a Modificar" />
   <button (click)="actualizarFestivo()">Modificar</button>
+
+  <hr>
 
   <h2>Eliminar Festivo</h2>
   <input [(ngModel)]="idEliminar" type="number" placeholder="ID a Eliminar" />

@@ -17,7 +17,7 @@ export class FestivosService {
   }
 
   listarTodos(): Observable<any> {
-    return this.http.get(this.baseUrl);
+    return this.http.get(`${this.baseUrl}/listar`);
   }
 
   buscarPorTipoYNombre(tipo: number, nombre: string): Observable<any> {
