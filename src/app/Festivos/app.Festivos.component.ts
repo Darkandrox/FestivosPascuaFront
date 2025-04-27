@@ -88,15 +88,15 @@ export class AppFestivosComponent implements OnInit {
       return;
     }
     const [anio, mes, dia] = this.fechaValidar.split('-').map(Number);
-    this.checkIfFestivoExists(dia, mes, anio).subscribe(existe => {
+    this.checkIfFestivoExists(dia, mes).subscribe(existe => {
       this.resultadoValidacion = existe;
     })
   };
 
-  checkIfFestivoExists(dia: number, mes: number, anio: number): Observable<boolean> {
+  checkIfFestivoExists(dia: number, mes: number): Observable<boolean> {
     return this.todosFestivos$.pipe(
       map(festivos => festivos.some(festivo => 
-        festivo.dia === dia && festivo.mes === mes && festivo.anio === anio
+        festivo.dia === dia && festivo.mes === mes && festivo
       ))
     );
   }

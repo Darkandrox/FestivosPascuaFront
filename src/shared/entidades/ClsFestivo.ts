@@ -3,7 +3,6 @@ export interface ClsFestivo {
   nombre: string;
   dia: number;
   mes: number;
-  anio: number;
   diasPascuas: number;
   idTipo: number;
   tipo: {
